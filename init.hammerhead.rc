@@ -372,6 +372,8 @@ on property:sys.boot_completed=1
     # enable logging of wake up reasons to kernel logs
     write /sys/module/msm_show_resume_irq/parameters/debug_mask 1
 
+    start vendor.msm_irqbalance
+
     # keep that at the end of sys.boot_completed
     setprop vendor.post_boot.parsed 1
 
@@ -440,6 +442,12 @@ service vendor.bluetooth_loader /vendor/bin/bluetooth_loader
     user bluetooth
     group system bluetooth
     oneshot
+
+service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    class core
+    user root
+    group root
+    disabled
 
 on property:init.svc.vendor.bluetooth_loader=stopped
     chmod 0644 /data/misc/bluetooth/.bdaddr

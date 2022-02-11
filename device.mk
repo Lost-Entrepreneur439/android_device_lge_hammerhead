@@ -505,6 +505,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.primary_display_orientation=ORIENTATION_0 \
     ro.surface_flinger.clear_slots_with_set_layer_buffer=true
 
+# msm_irqbalance
+PRODUCT_PACKAGES += \
+    msm_irqbalance
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
+
 # Input resampling configuration
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1
