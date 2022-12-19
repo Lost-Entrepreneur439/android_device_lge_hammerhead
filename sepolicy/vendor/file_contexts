@@ -16,6 +16,9 @@
 # Image Rotator Driver
 /dev/msm_rotator    u:object_r:video_device:s0
 
+# Audio HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.audio\.service\.hh             u:object_r:hal_audio_default_exec:s0
+
 # DRM clearkey
 /(vendor|system/vendor)/bin/hw/android\.hardware\.drm-service\.clearkey    u:object_r:hal_drm_clearkey_exec:s0
 
