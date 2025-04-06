@@ -200,6 +200,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
 
 
+# Audio package for Go
+$(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
+
 # Camera
 PRODUCT_PACKAGES += \
     libqomx_core \
