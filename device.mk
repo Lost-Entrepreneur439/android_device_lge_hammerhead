@@ -205,11 +205,11 @@ $(call inherit-product, frameworks/base/data/sounds/AudioPackageGo.mk)
 
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.5-service \
     libqomx_core \
     camera.device@3.2-impl \
     libmmcamera_interface \
     libmmjpeg_interface \
-    android.hardware.camera.provider@2.4-impl \
     camera.hammerhead
 
 PRODUCT_PACKAGES += \
