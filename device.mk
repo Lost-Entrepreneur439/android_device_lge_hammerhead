@@ -322,7 +322,8 @@ PRODUCT_PACKAGES += \
     vendor.lineage.fastcharge@1.0-service.hh
 
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl
+    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-service
 
 # NTFS Filesystem
 PRODUCT_PACKAGES += \
