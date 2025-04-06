@@ -341,6 +341,10 @@ on property:sys.boot_completed=1
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/restricted/cpus 1
 
+    # Limit cputime for background tasks
+    write /dev/cpuctl/background/cpu.cfs_period_us 1000000
+    write /dev/cpuctl/background/cpu.cfs_quota_us 2000000
+
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
 
