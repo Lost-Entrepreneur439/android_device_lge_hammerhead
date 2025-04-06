@@ -12,3 +12,5 @@ unix_socket_connect(hal_audio_default, qmuxd, qmuxd)
 
 get_prop(hal_audio_default, default_prop);
 get_prop(hal_audio_default, audio_prop);
+
+allow hal_audio_default diag_device:chr_file { ioctl open read write };
