@@ -327,7 +327,7 @@ on zygote-start
 on property:sys.boot_completed=1
     # start mpdecision
     rm /data/system/perfd/default_values
-    start mpdecision
+    # start mpdecision
 
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
