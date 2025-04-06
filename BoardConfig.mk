@@ -28,6 +28,9 @@ TARGET_NO_BOOTLOADER := true
 # Verified Boot
 BOARD_AVB_ENABLE := false
 
+# Use deprecated non_ab OTA
+AB_OTA_UPDATER := false
+
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
