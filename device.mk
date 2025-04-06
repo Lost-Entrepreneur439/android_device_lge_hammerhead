@@ -325,6 +325,10 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
 
+# Net
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
+
 # NTFS Filesystem
 PRODUCT_PACKAGES += \
     fsck.ntfs \
