@@ -345,6 +345,10 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/background/cpu.cfs_period_us 1000000
     write /dev/cpuctl/background/cpu.cfs_quota_us 2000000
 
+    # Limit cputime for dex2oat
+    write /dev/cpuctl/dex2oat/cpu.cfs_period_us 1000000
+    write /dev/cpuctl/dex2oat/cpu.cfs_quota_us 2000000
+
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
 
