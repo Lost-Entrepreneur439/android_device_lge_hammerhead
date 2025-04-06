@@ -332,6 +332,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
+PRODUCT_PACKAGES += \
+    android.hardware.radio.config@1.0-service
+
 # NTFS Filesystem
 PRODUCT_PACKAGES += \
     fsck.ntfs \
