@@ -121,6 +121,10 @@ PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
 
+# Enforced RRO targets
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service.legacy \
     libwpa_client \
