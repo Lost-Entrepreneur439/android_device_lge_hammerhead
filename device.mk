@@ -520,15 +520,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.am.reschedule_service=true \
     ro.vendor.qti.sys.fw.bservice_enable=true
 
-# Dalvik heap
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=16m \
-    dalvik.vm.heapgrowthlimit=192m \
-    dalvik.vm.heapsize=512m \
-    dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=512k \
-    dalvik.vm.heapmaxfree=8m
-
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.perf.cores_online=4 \
