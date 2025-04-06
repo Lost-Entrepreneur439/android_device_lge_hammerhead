@@ -530,6 +530,10 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.foreground-heap-growth-multiplier=2.0
 
+# Battery
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.small_battery=true
+
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.perf.cores_online=4 \
