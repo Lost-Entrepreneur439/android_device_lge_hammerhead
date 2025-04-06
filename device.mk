@@ -513,7 +513,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-cpu-set=2,3 \
     dalvik.vm.boot-dex2oat-threads=4 \
     dalvik.vm.boot-dex2oat-cpu-set=0,1,2,3 \
-    dalvik.vm.systemuicompilerfilter=speed \
     ro.sys.fw.dex2oat_thread_count=4
 
 # Memory optimizations
