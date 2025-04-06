@@ -127,11 +127,6 @@ DEVICE_MANIFEST_FILE := device/lge/hammerhead/manifest.xml
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 TARGET_HAS_HH_VSYNC_ISSUE := true
 
-TARGET_PROCESS_SDK_VERSION_OVERRIDE := \
-    /system/bin/cameraserver=22 \
-    /system/bin/mediaserver=22 \
-    /system/vendor/bin/mm-qcamera-daemon=22
-
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -139,21 +134,11 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 SELINUX_IGNORE_NEVERALLOWS := true
 endif
 
-# Shims
-TARGET_LD_SHIM_LIBS := \
-    /vendor/lib/libril-qc-qmi-1.so|libshim_ril.so
-
 # SVELTE
 MALLOC_SVELTE := true
-
-# VNDK
-TARGET_VNDK_USE_CORE_VARIANT := true
 
 # Power
 TARGET_USES_INTERACTION_BOOST := true
 TARGET_USES_NON_LEGACY_POWERHAL := true
-
-# Legacy memfd
-TARGET_HAS_MEMFD_BACKPORT := true
 
 -include vendor/lge/hammerhead/BoardConfigVendor.mk
