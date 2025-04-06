@@ -349,6 +349,17 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/dex2oat/cpu.cfs_period_us 1000000
     write /dev/cpuctl/dex2oat/cpu.cfs_quota_us 2000000
 
+    # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 5% dex2oat ~2.5%)
+    write /dev/cpuctl/background/cpu.shares 1024
+    write /dev/cpuctl/system-background/cpu.shares 1024
+    write /dev/cpuctl/dex2oat/cpu.shares 512
+    write /dev/cpuctl/foreground/cpu.shares 20480
+    write /dev/cpuctl/top-app/cpu.shares 20480
+    write /dev/cpuctl/camera-daemon/cpu.shares 20480
+    write /dev/cpuctl/system/cpu.shares 20480
+    write /dev/cpuctl/nnapi-hal/cpu.shares 20480
+    write /dev/cpuctl/rt/cpu.shares 20480
+
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
 
