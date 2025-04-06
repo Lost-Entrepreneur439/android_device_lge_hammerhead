@@ -526,6 +526,10 @@ $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
+# Dalvik heap
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.foreground-heap-growth-multiplier=2.0
+
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.perf.cores_online=4 \
