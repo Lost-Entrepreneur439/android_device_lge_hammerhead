@@ -57,5 +57,7 @@
     <!-- Whether the mobile signal icon pipeline should ignore IWlan status -->
     <bool name="config_mobileIconIgnoresIWlan">true</bool>
 
+    <!-- Whether to show activity indicators in the status bar -->
+    <bool name="config_showActivity">true</bool>
 </resources>
 
