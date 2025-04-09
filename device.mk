@@ -591,6 +591,10 @@ $(call inherit-product-if-exists, $(LOCAL_PATH)/wlan/bcm.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.lineage.build.vendor_security_patch=2016-10-05
 
+# Updater properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.recovery_update=false
+
 # Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to
 #  pick up the default Android Platform product locale list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
