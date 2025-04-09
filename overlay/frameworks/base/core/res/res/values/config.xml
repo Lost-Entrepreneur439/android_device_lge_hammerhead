@@ -264,4 +264,7 @@
     <!-- The maximum number of visible recent tasks to be presented to the user through the
          SystemUI. Can be -1 if there is no maximum limit. -->
     <integer name="config_maxNumVisibleRecentTasks_lowRam">4</integer>
+
+    <!-- The max scale for the wallpaper when it's zoomed in -->
+    <item name="config_wallpaperMaxScale" format="float" type="dimen">1.00</item>
 </resources>
