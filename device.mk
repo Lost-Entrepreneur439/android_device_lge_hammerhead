@@ -520,6 +520,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.qti.am.reschedule_service=true \
     ro.vendor.qti.sys.fw.bservice_enable=true
 
+# Inherit 512M Android Go defaults.
+$(call inherit-product, build/make/target/product/go_defaults_512.mk)
+
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.perf.cores_online=4 \
