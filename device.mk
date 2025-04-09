@@ -215,7 +215,8 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     libmmcamera_interface \
     libmmjpeg_interface \
-    camera.hammerhead
+    camera.hammerhead \
+    Aperture
 
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.1-service
