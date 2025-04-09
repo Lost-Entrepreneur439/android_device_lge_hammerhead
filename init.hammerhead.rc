@@ -223,6 +223,9 @@ on boot
     write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
+    # Limit device temperature
+    write /sys/module/msm_thermal/parameters/temp_threshold 60
+
     # Disable console
     stop console
 
