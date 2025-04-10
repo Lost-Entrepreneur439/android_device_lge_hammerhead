@@ -100,8 +100,9 @@ return 0
 
 #
 # Function will modify size of partitions
-# /system partition will be increased to ~1444MB
+# /system partition will be increased to ~2600MB
 # /cache partition will be decreased to ~255MB
+# /data partition will be decreased for ~1.1GB
 #
 modify_partitions_size()
 {
@@ -132,7 +133,7 @@ parted /dev/block/mmcblk0 name 26 crypto
 parted /dev/block/mmcblk0 unit b mkpart primary 2860396288B 3132140287B
 parted /dev/block/mmcblk0 name 27 cache
 
-parted /dev/block/mmcblk0 unit b mkpart primary 3132140800B 31268513791B
+parted /dev/block/mmcblk0 unit b mkpart primary 3132140800B 15757976575B
 parted /dev/block/mmcblk0 name 28 userdata
 
 sleep 5
@@ -186,7 +187,7 @@ parted /dev/block/mmcblk0 name 26 crypto
 parted /dev/block/mmcblk0 unit b mkpart primary 1298137088B 2032140287B
 parted /dev/block/mmcblk0 name 27 cache
 
-parted /dev/block/mmcblk0 unit b mkpart primary 2032140288B 31268513791B
+parted /dev/block/mmcblk0 unit b mkpart primary 2032140288B 15757977599B
 parted /dev/block/mmcblk0 name 28 userdata
 
 sleep 5

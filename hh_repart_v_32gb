@@ -1,0 +1,253 @@
+#!/sbin/sh
+#
+# Made for Hammerhead
+#
+
+
+#
+# Function will print usage instruction
+#
+print_usage_instruction()
+{
+echo " ";
+echo "Dump info about partitions to /sdcard/partitions.log :";
+echo "hh_repart -d";
+echo " ";
+echo "Modify size of partitions :";
+echo "hh_repart -m";
+echo " ";
+echo "Restore size of partitions :";
+echo "hh_repart -r";
+echo " ";
+
+return 0
+}
+
+
+#
+# Function will dump info about current partitions to /sdcard/partitions.log
+#
+dump_partitions_size()
+{
+echo "Dumping info about partitions...";
+parted /dev/block/mmcblk0 unit b p quit -> /sdcard/partitions.log
+
+echo "-- Finished --";
+return 0
+}
+
+
+#
+# Function will check current partitions
+# Returns 3 values:
+#    0 - Original partitions layout with 1.0Gb system
+#    1 - Modified partitions layout with 1.5Gb system
+#  255 - Unknown partitions layout. Modification SHOULD NOT be performed!
+#
+check_partitions_size()
+{
+echo "Checking size of partitions...";
+parted /dev/block/mmcblk0 unit b p quit -> /tmp/part
+
+if grep "1073741824B" /tmp/part > /dev/null
+then
+  rm /tmp/part
+  return 0
+elif grep "2636000512B" /tmp/part > /dev/null
+then
+  rm /tmp/part
+  return 1
+else
+  rm /tmp/part
+  return 255
+fi
+}
+
+
+#
+# Functions used to work with partitions
+#
+partition_mounted() {
+mount | grep -q " $1 ";
+}
+
+partition_umount() {
+umount $1 >> /dev/null 2>&1 || umount -f $1 >> /dev/null 2>&1
+}
+
+partitions_umount() {
+local list="$*"
+
+local partition
+for partition in $list; do
+  partition_umount $partition
+done
+
+return 0
+}
+
+partitions_valid() {
+local list="$*"
+
+local partition
+for partition in $list; do
+  partition_mounted $partition && return 1
+done
+
+return 0
+}
+
+
+#
+# Function will modify size of partitions
+# /system partition will be increased to ~2600MB
+# /cache partition will be decreased to ~255MB
+# /data partition will be decreased for ~1.1GB
+#
+modify_partitions_size()
+{
+echo " ";
+echo "Modifying partitions...";
+
+partitions_umount /sdcard /data /cache /system
+partitions_valid /sdcard /data /cache /system
+if [ $? -ne 0 ]; then
+  echo "Error: Not all partitions unmounted!"
+  return 1
+fi
+
+mkdir -p /tmp/backup
+dd if=/dev/block/mmcblk0p26 of=/tmp/backup/crypto.img
+
+parted /dev/block/mmcblk0 rm 25
+parted /dev/block/mmcblk0 rm 26
+parted /dev/block/mmcblk0 rm 27
+parted /dev/block/mmcblk0 rm 28
+
+parted /dev/block/mmcblk0 unit b mkpart primary 192937984B 2828937983B
+parted /dev/block/mmcblk0 name 25 system
+
+parted /dev/block/mmcblk0 unit b mkpart extended 2828938496B 2860395775B
+parted /dev/block/mmcblk0 name 26 crypto
+
+parted /dev/block/mmcblk0 unit b mkpart primary 2860396288B 3132140287B
+parted /dev/block/mmcblk0 name 27 cache
+
+parted /dev/block/mmcblk0 unit b mkpart primary 3132140800B 31268513791B
+parted /dev/block/mmcblk0 name 28 userdata
+
+sleep 5
+
+yes | mke2fs -t ext4 /dev/block/mmcblk0p25
+yes | mke2fs -t ext4 /dev/block/mmcblk0p27
+yes | mke2fs -t ext4 /dev/block/mmcblk0p28
+
+e2fsck -p -f /dev/block/mmcblk0p25
+e2fsck -p -f /dev/block/mmcblk0p27
+e2fsck -p -f /dev/block/mmcblk0p28
+
+dd if=/tmp/backup/crypto.img of=/dev/block/mmcblk0p26
+rm -rf /tmp/backup/
+
+echo "-- Finished --";
+reboot recovery
+return 0
+}
+
+
+#
+# Function will restore size of partitions to stock setup
+#
+restore_partitions_size()
+{
+echo " ";
+echo "Restoring partitions...";
+
+partitions_umount /sdcard /data /cache /system
+partitions_valid /sdcard /data /cache /system
+if [ $? -ne 0 ]; then
+  echo "Error: Not all partitions unmounted!"
+  return 1
+fi
+
+mkdir -p /tmp/backup
+dd if=/dev/block/mmcblk0p26 of=/tmp/backup/crypto.img
+
+parted /dev/block/mmcblk0 rm 25
+parted /dev/block/mmcblk0 rm 26
+parted /dev/block/mmcblk0 rm 27
+parted /dev/block/mmcblk0 rm 28
+
+parted /dev/block/mmcblk0 unit b mkpart primary 192937984B 1266679807B
+parted /dev/block/mmcblk0 name 25 system
+
+parted /dev/block/mmcblk0 unit b mkpart extended 1266679808B 1298137087B
+parted /dev/block/mmcblk0 name 26 crypto
+
+parted /dev/block/mmcblk0 unit b mkpart primary 1298137088B 2032140287B
+parted /dev/block/mmcblk0 name 27 cache
+
+parted /dev/block/mmcblk0 unit b mkpart primary 2032140288B 31268513791B
+parted /dev/block/mmcblk0 name 28 userdata
+
+sleep 5
+
+yes | mke2fs -t ext4 /dev/block/mmcblk0p25
+yes | mke2fs -t ext4 /dev/block/mmcblk0p27
+yes | mke2fs -t ext4 /dev/block/mmcblk0p28
+
+e2fsck -p -f /dev/block/mmcblk0p25
+e2fsck -p -f /dev/block/mmcblk0p27
+e2fsck -p -f /dev/block/mmcblk0p28
+
+dd if=/tmp/backup/crypto.img of=/dev/block/mmcblk0p26
+rm -rf /tmp/backup/
+
+echo "-- Finished --";
+reboot recovery
+return 0
+}
+
+
+if [ -z "$1" ]; then
+  print_usage_instruction
+  exit 0
+fi
+
+if [ "$1" == "-d" ]; then
+  dump_partitions_size
+  exit 0
+fi
+
+if [ "$1" == "-m" ]; then
+  check_partitions_size
+  if [ $? -eq 0 ]; then
+    echo "Original partitions. Let's go on!";
+    modify_partitions_size
+  elif [ $? -eq 1 ]; then
+    echo "Modified partitions. No need to modify twice :)";
+    echo " ";
+  else
+    echo "Unknown partitions. We can't handle that :(";
+    echo " ";
+  fi
+  exit 0
+fi
+
+if [ "$1" == "-r" ]; then
+  check_partitions_size
+  if [ $? -eq 0 ]; then
+    echo "Original partitions. No need to restore twice :)";
+    echo " ";
+  elif [ $? -eq 1 ]; then
+    echo "Modified partitions. Let's go on!";
+    restore_partitions_size
+  else
+    echo "Unknown partitions. We can't handle that :(";
+    echo " ";
+  fi
+  exit 0
+fi
+
+print_usage_instruction
+exit 0
