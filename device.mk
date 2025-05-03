@@ -159,11 +159,6 @@ PRODUCT_PACKAGES += \
     timekeep \
     TimeKeep
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapersPicker \
-    librs_jni
-
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
