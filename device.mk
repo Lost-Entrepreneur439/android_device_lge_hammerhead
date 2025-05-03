@@ -188,7 +188,7 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl \
-    android.hardware.audio.service.hh \
+    android.hardware.audio.service \
     audio.primary.msm8974 \
     audio.usb.default \
     audio.r_submix.default \
