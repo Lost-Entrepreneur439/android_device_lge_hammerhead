@@ -503,7 +503,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
     ro.surface_flinger.max_virtual_display_dimension=2048 \
     ro.surface_flinger.use_vr_flinger=false \
-    ro.surface_flinger.start_graphics_allocator_service=false \
+    ro.surface_flinger.start_graphics_allocator_service=true \
     ro.surface_flinger.primary_display_orientation=ORIENTATION_0 \
     ro.surface_flinger.clear_slots_with_set_layer_buffer=true
 
