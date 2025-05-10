@@ -264,7 +264,8 @@ PRODUCT_PACKAGES += \
 
 # Music player
 PRODUCT_PACKAGES += \
-    Twelve
+    Twelve \
+    AudioFX
 
 # Seccomp
 PRODUCT_COPY_FILES += \
