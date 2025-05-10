@@ -214,6 +214,8 @@ on boot
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
 
+    write /proc/sys/kernel/sched_min_granularity_ns  3000000
+
     # Enable core control
     write /sys/module/msm_thermal/core_control/enabled 1
 
