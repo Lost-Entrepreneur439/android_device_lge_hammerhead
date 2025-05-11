@@ -40,6 +40,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.hammerhead:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.hammerhead \
     $(LOCAL_PATH)/ueventd.hammerhead.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
+PRODUCT_PACKAGES += \
+    init.post_boot.sh
+
 # Input device files for hammerhead
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
