@@ -21,3 +21,13 @@ get_prop(vendor_init, system_prop);
 get_prop(vendor_init, apexd_prop);
 set_prop(vendor_init, init_service_status_prop);
 set_prop(vendor_init, vendor_mpctl_prop);
+
+set_prop(vendor_init, bluetooth_prop);
+set_prop(vendor_init, camera_prop);
+set_prop(vendor_init, config_prop);
+set_prop(vendor_init, exported_config_prop);
+set_prop(vendor_init, exported_pm_prop);
+set_prop(vendor_init, graphics_vulkan_prop);
+set_prop(vendor_init, radio_prop);
+set_prop(vendor_init, system_prop);
+set_prop(vendor_init, vendor_rild_libpath_prop);
