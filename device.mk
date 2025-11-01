@@ -23,10 +23,6 @@
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
-# APEX
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ld.config.txt:$(TARGET_COPY_OUT_VENDOR)/etc/swcodec/ld.config.txt
-
 # Public Libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
