@@ -241,8 +241,8 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl.legacy \
-    android.hardware.gnss@1.0-service.legacy \
+    android.hardware.gnss@1.0-impl.hh \
+    android.hardware.gnss@1.0-service.hh \
     libgps.utils \
     gps.msm8974
 
