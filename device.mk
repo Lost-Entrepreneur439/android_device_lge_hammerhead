@@ -155,7 +155,7 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sysfs
+    vendor.lineage.livedisplay-service.sysfs
 
 # TimeKeep
 PRODUCT_PACKAGES += \
