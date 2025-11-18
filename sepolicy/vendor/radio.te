@@ -12,3 +12,4 @@ unix_socket_connect(rild, qmuxd, qmuxd)
 allow qmuxd rild_qmuxd_socket:sock_file { getattr unlink };
 
 allow radio rild_qmuxd_socket:sock_file rw_file_perms;
+allow radio rild:unix_stream_socket connectto;
