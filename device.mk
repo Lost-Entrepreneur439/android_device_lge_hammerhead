@@ -173,7 +173,8 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
     libqdutils \
-    libqdMetaData
+    libqdMetaData \
+    libui.vendor
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -295,7 +296,13 @@ PRODUCT_PACKAGES += \
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.hh \
-    android.hardware.power.stats-service.example
+    android.hardware.power.stats-service.example \
+    libpower.vendor \
+    libsqlite.vendor
+
+# libstdc++ for vendor blobs
+PRODUCT_PACKAGES += \
+    libstdc++_vendor
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -341,7 +348,8 @@ PRODUCT_PACKAGES += \
 
 # Net
 PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
+    netutils-wrapper-1.0 \
+    libnetutils.vendor
 
 PRODUCT_PACKAGES += \
     android.hardware.radio.config@1.0-service \
