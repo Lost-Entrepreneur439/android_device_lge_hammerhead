@@ -21,7 +21,8 @@
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(LOCAL_PATH) \
+    hardware/broadcom/libbt
 
 # Public Libraries
 PRODUCT_COPY_FILES += \
@@ -148,6 +149,9 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0-service \
     libbt-vendor
+
+$(call soong_config_set,brcm_libbt,custom_bt_config,//device/lge/hammerhead:vnd_hammerhead.txt)
+$(call soong_config_set,brcm_libbt,bdroid_buildcfg_include_dir,device/lge/hammerhead/bluetooth/configs)
 
 # ConfigStore
 PRODUCT_PACKAGES += \
