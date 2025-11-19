@@ -13,7 +13,7 @@ ro.use_data_netmgrd   u:object_r:radio_prop:s0
 ro.usb.   u:object_r:radio_prop:s0
 
 # Camera/media
-persist.hwc.   u:object_r:system_prop:s0
+persist.hwc.mdpcomp.enable  u:object_r:vendor_default_prop:s0
 ro.camera.experimental_libs   u:object_r:camera_prop:s0
 vidc.enc.narrow.searchrange   u:object_r:camera_prop:s0
 ro.media.maxmem   u:object_r:system_prop:s0
