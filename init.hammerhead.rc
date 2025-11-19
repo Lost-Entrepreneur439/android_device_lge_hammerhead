@@ -20,6 +20,8 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
 
+    mount cgroup cpuset /dev/cpuset cpuset
+
     # set permissions for cmdline
     chmod 0444 /proc/cmdline
 
@@ -342,11 +344,18 @@ on property:sys.boot_completed=1
 
     # Update foreground and background cpusets
     # Reserve CPU 3 for the top app
-    write /dev/cpuset/foreground/cpus 0-2
-    write /dev/cpuset/background/cpus 0-1
-    write /dev/cpuset/system-background/cpus 0-1
-    write /dev/cpuset/top-app/cpus 0-3
-    write /dev/cpuset/restricted/cpus 1
+    write /dev/cpuset/foreground/cpuset.cpus 0-2
+    write /dev/cpuset/foreground/cpuset.mems 0
+    write /dev/cpuset/background/cpuset.cpus 0-1
+    write /dev/cpuset/background/cpuset.mems 0
+    write /dev/cpuset/system-background/cpuset.cpus 0-1
+    write /dev/cpuset/system-background/cpuset.mems 0
+    write /dev/cpuset/top-app/cpuset.cpus 0-3
+    write /dev/cpuset/top-app/cpuset.mems 0
+    write /dev/cpuset/restricted/cpuset.cpus 1
+    write /dev/cpuset/restricted/cpuset.mems 0
+    write /dev/cpuset/camera-daemon/cpuset.cpus 0-3
+    write /dev/cpuset/camera-daemon/cpuset.mems 0
 
     # Limit cputime for background tasks
     write /dev/cpuctl/background/cpu.cfs_period_us 1000000
