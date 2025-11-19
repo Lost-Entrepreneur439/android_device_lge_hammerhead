@@ -17,6 +17,9 @@
 import /vendor/etc/init/hw/init.hammerhead.usb.rc
 
 on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chown system system /sys/kernel/debug/kgsl/proc
+
     # set permissions for cmdline
     chmod 0444 /proc/cmdline
 
