@@ -207,7 +207,7 @@ on boot
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "19000 1400000:39000 1700000:19000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 99
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1497600
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1728000
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
@@ -224,9 +224,9 @@ on boot
 
     # Configure the cpu-boost module
     write /sys/module/cpu_boost/parameters/input_boost_enabled 1
-    write /sys/module/cpu_boost/parameters/boost_ms 20
+    write /sys/module/cpu_boost/parameters/boost_ms 40
     write /sys/module/cpu_boost/parameters/sync_threshold 1728000
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1728000 1:1728000 2:1728000 3:1728000"
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
     # Limit device temperature
