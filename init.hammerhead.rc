@@ -156,8 +156,10 @@ on boot
     chmod 0644 /sys/module/bcmdhd/parameters/nvram_path
 
     # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
+    chmod 0400 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+    write /sys/module/lowmemorykiller/parameters/adj "0,200,500,700,900,950"
+    chmod 0400 /sys/module/lowmemorykiller/parameters/adj
     write /sys/module/lowmemorykiller/parameters/debug_level 0
 
     # Enable Power modes
