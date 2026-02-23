@@ -225,11 +225,11 @@ on boot
     write /sys/module/msm_thermal/core_control/enabled 1
 
     # Configure the cpu-boost module
-    write /sys/module/cpu_boost/parameters/input_boost_enabled 1
+    write /sys/module/cpu_boost/parameters/input_boost_enabled 0
     write /sys/module/cpu_boost/parameters/boost_ms 40
-    write /sys/module/cpu_boost/parameters/sync_threshold 1728000
-    write /sys/module/cpu_boost/parameters/input_boost_freq "0:1728000 1:1728000 2:1728000 3:1728000"
-    write /sys/module/cpu_boost/parameters/input_boost_ms 40
+    write /sys/module/cpu_boost/parameters/sync_threshold 0
+    write /sys/module/cpu_boost/parameters/input_boost_freq "0:0 1:0 2:0 3:0"
+    write /sys/module/cpu_boost/parameters/input_boost_ms 0
 
     # Limit device temperature
     write /sys/module/msm_thermal/parameters/temp_threshold 60
@@ -377,6 +377,9 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/system/cpu.shares 20480
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
+
+    # Boost CPU on critical tasks migration
+    write /dev/cpuctl/top-app/cpu.notify_on_migrate 1
 
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
