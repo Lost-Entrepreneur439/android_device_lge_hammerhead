@@ -110,6 +110,9 @@ TARGET_KERNEL_LLVM_BINUTILS := false
 TARGET_KERNEL_NO_GCC := false
 TARGET_KERNEL_CONFIG := lineageos_hammerhead_defconfig
 TARGET_KERNEL_SOURCE := kernel/lge/hammerhead
+TOP_PATH := $(realpath $(TOP))
+KERNEL_TOOLCHAIN := $(TOP_PATH)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-none-eabi-
 
 TARGET_RECOVERY_FSTAB = device/lge/hammerhead/fstab.hammerhead
 
