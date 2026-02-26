@@ -384,6 +384,10 @@ on property:sys.boot_completed=1
     # Reduce power consumption and heating
     write /sys/module/workqueue/parameters/power_efficient 1
     write /sys/devices/system/cpu/sched_mc_power_savings 2
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1728000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1728000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 1728000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 1728000
 
     # enable zram
     swapon_all /vendor/etc/fstab.hammerhead
