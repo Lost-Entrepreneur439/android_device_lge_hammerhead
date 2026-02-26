@@ -305,4 +305,9 @@
 
     <!-- Indicates whether the device supports bubble notifications or not. -->
     <bool name="config_supportsBubble">false</bool>
+
+    <!-- Whether this device prefers to show snapshot or splash screen on back predict target.
+         When set true, there will create windowless starting surface for the preview target, so it
+         won't affect activity's lifecycle. This should only be disabled on low-ram device. -->
+    <bool name="config_predictShowStartingSurface">false</bool>
 </resources>
