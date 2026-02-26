@@ -302,4 +302,7 @@
     <!-- Whether WM DisplayContent supports high performance transitions
          (lower-end devices may want to disable) -->
     <bool name="config_deviceSupportsHighPerfTransitions">false</bool>
+
+    <!-- Indicates whether the device supports bubble notifications or not. -->
+    <bool name="config_supportsBubble">false</bool>
 </resources>
