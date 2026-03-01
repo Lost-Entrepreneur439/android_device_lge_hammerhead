@@ -747,7 +747,7 @@ hidl_string getProtocolStringFromInt(const V1_4::PdpProtocolType protocol){
     if(protocol >= V1_4::PdpProtocolType::IP && protocol <= V1_4::PdpProtocolType::UNSTRUCTURED)
         return protocolStrings[(int)protocol];
 
-    return hidl_string("");
+    return hidl_string("IP");
 }
 
 V1_0::DataProfileInfo Get1_0DataProfileInfo(const V1_4::DataProfileInfo& dataProfileInfo){
