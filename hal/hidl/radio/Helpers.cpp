@@ -34,6 +34,14 @@ V1_4::SignalStrength Create1_4SignalStrength(const V1_0::SignalStrength& sigStre
     newSigStrength.nr.csiRsrq = INT_MAX;
     newSigStrength.nr.csiSinr = INT_MAX;
 
+    if (newSigStrength.lte.signalStrength == 99 && newSigStrength.gsm.signalStrength != 99) {
+        newSigStrength.lte.signalStrength = INT_MAX;
+        newSigStrength.lte.rsrq = INT_MAX;
+        newSigStrength.lte.rssnr = INT_MAX;
+        newSigStrength.lte.cqi = INT_MAX;
+        newSigStrength.lte.timingAdvance = INT_MAX;
+    }
+
     return newSigStrength;
 }
 
