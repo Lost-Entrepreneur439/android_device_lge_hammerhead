@@ -1,4 +1,4 @@
-service vendor.radio-1-4-legacy /vendor/bin/hw/android.hardware.radio@1.4-service.legacy
+service vendor.radio-1-4-hammerhead /vendor/bin/hw/android.hardware.radio@1.4-service.hammerhead
     interface android.hardware.radio@1.0::IRadio default
     interface android.hardware.radio@1.1::IRadio default
     interface android.hardware.radio@1.2::IRadio default
