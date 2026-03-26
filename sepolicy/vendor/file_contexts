@@ -34,6 +34,9 @@
 # Power HAL
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power-service\.hh     u:object_r:hal_power_default_exec:s0
 
+# Radio HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.radio@1\.4-service.hammerhead    u:object_r:hal_radio_default_exec:s0
+
 # Vibrator HAL
 /(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator-service\.hh  u:object_r:hal_vibrator_default_exec:s0
 
