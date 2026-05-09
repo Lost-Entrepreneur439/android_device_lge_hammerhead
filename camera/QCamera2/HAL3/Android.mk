@@ -51,7 +51,6 @@ LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcam
 
 LOCAL_STATIC_LIBRARIES := android.hardware.camera.common-helper
 
-#LOCAL_MODULE := camera.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE := camera.$(TARGET_DEVICE)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_RELATIVE_PATH := hw
