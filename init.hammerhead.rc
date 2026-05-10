@@ -480,3 +480,17 @@ on property:init.svc.vendor.bluetooth_loader=stopped
 
 on property:apexd.status=ready
     mount none /vendor/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
+
+service wireless_regdomain_update /vendor/bin/wireless-regdomain.sh
+  class main
+  user root
+  group root
+  oneshot
+  seclabel u:r:su:s0
+  disabled
+
+on property:gsm.operator.iso-country=*
+  start wireless_regdomain_update
+
+on property:gsm.sim.operator.iso-country=*
+  start wireless_regdomain_update

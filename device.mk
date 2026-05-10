@@ -139,7 +139,9 @@ PRODUCT_PACKAGES += \
     hostapd \
     wificond \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    iw_vendor \
+    wireless-regdomain.sh
 
 # Overlays for Wifi and Tethering configuration
 PRODUCT_PACKAGES += \
