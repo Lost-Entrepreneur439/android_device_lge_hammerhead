@@ -139,7 +139,9 @@ PRODUCT_PACKAGES += \
     hostapd \
     wificond \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    iw_vendor \
+    wireless-regdomain.sh
 
 # Overlays for Wifi and Tethering configuration
 PRODUCT_PACKAGES += \
@@ -163,6 +165,8 @@ PRODUCT_PACKAGES += \
 # LiveDisplay
 PRODUCT_PACKAGES += \
     vendor.lineage.livedisplay-service.sysfs
+
+$(call soong_config_set_bool,livedisplay_sysfs,enable_dcc,true)
 
 # TimeKeep
 PRODUCT_PACKAGES += \

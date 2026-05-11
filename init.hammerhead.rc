@@ -155,9 +155,8 @@ on boot
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
     chmod 0644 /sys/module/bcmdhd/parameters/nvram_path
 
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
-    chmod 0400 /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+    # LMK configuration
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
     write /sys/module/lowmemorykiller/parameters/adj "0,200,500,700,900,950"
     chmod 0400 /sys/module/lowmemorykiller/parameters/adj
     write /sys/module/lowmemorykiller/parameters/debug_level 0
@@ -480,3 +479,17 @@ on property:init.svc.vendor.bluetooth_loader=stopped
 
 on property:apexd.status=ready
     mount none /vendor/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
+
+service wireless_regdomain_update /vendor/bin/wireless-regdomain.sh
+  class main
+  user root
+  group root
+  oneshot
+  seclabel u:r:su:s0
+  disabled
+
+on property:gsm.operator.iso-country=*
+  start wireless_regdomain_update
+
+on property:gsm.sim.operator.iso-country=*
+  start wireless_regdomain_update

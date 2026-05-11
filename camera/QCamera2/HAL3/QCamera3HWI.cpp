@@ -538,11 +538,17 @@ int QCamera3HardwareInterface::validateStreamDimensions(
             case ANDROID_SCALER_AVAILABLE_FORMATS_RAW_OPAQUE:
             case HAL_PIXEL_FORMAT_RAW10:
                 for (int i = 0;
-                      i < gCamCapability[mCameraId]->supported_raw_dim_cnt; i++){
+                      i < gCamCapability[0]->supported_raw_dim_cnt; i++){
                     if (gCamCapability[mCameraId]->raw_dim[i].width
                             == (int32_t) newStream->width
                         && gCamCapability[mCameraId]->raw_dim[i].height
                             == (int32_t) newStream->height) {
+                        sizeFound = true;
+                    }
+
+                    if ((int32_t) newStream->width == 1288 &&
+                        (int32_t) newStream->height == 968
+                        && mCameraId == 1) {
                         sizeFound = true;
                     }
                 }
@@ -3590,11 +3596,21 @@ int QCamera3HardwareInterface::initStaticMetadata(int cameraId)
                 (gCamCapability[cameraId]->picture_sizes_tbl_cnt) * 2);
 
     int32_t available_raw_sizes[MAX_SIZES_CNT * 2];
-    makeTable(gCamCapability[cameraId]->raw_dim,
-              gCamCapability[cameraId]->supported_raw_dim_cnt,
-              available_raw_sizes);
+
+    // raw size == active array size for front camera
+    cam_dimension_t backRawDimTable = { .width = 1288, .height = 968 };
+
+    if (facingBack)
+        makeTable(gCamCapability[cameraId]->raw_dim,
+                  gCamCapability[cameraId]->supported_raw_dim_cnt,
+                  available_raw_sizes);
+    else // front camera does not have ->raw_dim
+        makeTable(&backRawDimTable,
+                  1,
+                  available_raw_sizes);
+
     staticInfo.update(ANDROID_SCALER_AVAILABLE_RAW_SIZES,
-                available_raw_sizes,
+                available_raw_sizes, (!facingBack)? 2 :
                 gCamCapability[cameraId]->supported_raw_dim_cnt * 2);
 
     int32_t available_fps_ranges[MAX_SIZES_CNT * 2];
@@ -3665,12 +3681,19 @@ int QCamera3HardwareInterface::initStaticMetadata(int cameraId)
         case ANDROID_SCALER_AVAILABLE_FORMATS_RAW16:
         case ANDROID_SCALER_AVAILABLE_FORMATS_RAW_OPAQUE:
             for (int i = 0;
-                i < gCamCapability[cameraId]->supported_raw_dim_cnt; i++) {
+                i < gCamCapability[0]->supported_raw_dim_cnt; i++) {
                 available_stream_configs[idx] = scalar_formats[j];
-                available_stream_configs[idx+1] =
-                    gCamCapability[cameraId]->raw_dim[i].width;
-                available_stream_configs[idx+2] =
-                    gCamCapability[cameraId]->raw_dim[i].height;
+
+		        if (facingBack) {
+                    available_stream_configs[idx+1] =
+                        gCamCapability[cameraId]->raw_dim[i].width;
+                    available_stream_configs[idx+2] =
+                        gCamCapability[cameraId]->raw_dim[i].height;
+                } else {
+                    available_stream_configs[idx+1] = 1288;
+                    available_stream_configs[idx+2] = 968;
+                }
+
                 available_stream_configs[idx+3] =
                     ANDROID_SCALER_AVAILABLE_STREAM_CONFIGURATIONS_OUTPUT;
                 idx+=4;
@@ -3709,14 +3732,23 @@ int QCamera3HardwareInterface::initStaticMetadata(int cameraId)
         case ANDROID_SCALER_AVAILABLE_FORMATS_RAW16:
         case ANDROID_SCALER_AVAILABLE_FORMATS_RAW_OPAQUE:
             for (int i = 0;
-                i < gCamCapability[cameraId]->supported_raw_dim_cnt; i++) {
+                i < gCamCapability[0]->supported_raw_dim_cnt; i++) {
                 available_min_durations[idx] = scalar_formats[j];
-                available_min_durations[idx+1] =
-                    gCamCapability[cameraId]->raw_dim[i].width;
-                available_min_durations[idx+2] =
-                    gCamCapability[cameraId]->raw_dim[i].height;
-                available_min_durations[idx+3] =
-                    gCamCapability[cameraId]->raw_min_duration[i];
+
+                if (facingBack) {
+                    available_min_durations[idx+1] =
+                        gCamCapability[cameraId]->raw_dim[i].width;
+                    available_min_durations[idx+2] =
+                        gCamCapability[cameraId]->raw_dim[i].height;
+                    available_min_durations[idx+3] =
+                        gCamCapability[cameraId]->raw_min_duration[i];
+                } else {
+                    available_min_durations[idx+1] = 1288;
+                    available_min_durations[idx+2] = 968;
+                    available_min_durations[idx+3] =
+                        gCamCapability[0]->raw_min_duration[i];
+                }
+
                 idx+=4;
             }
             break;
@@ -3957,9 +3989,8 @@ int QCamera3HardwareInterface::initStaticMetadata(int cameraId)
     available_capabilities[available_capabilities_count++] = ANDROID_REQUEST_AVAILABLE_CAPABILITIES_MANUAL_POST_PROCESSING;
     available_capabilities[available_capabilities_count++] = ANDROID_REQUEST_AVAILABLE_CAPABILITIES_READ_SENSOR_SETTINGS;
     available_capabilities[available_capabilities_count++] = ANDROID_REQUEST_AVAILABLE_CAPABILITIES_BURST_CAPTURE;
-    if (facingBack) {
-        available_capabilities[available_capabilities_count++] = ANDROID_REQUEST_AVAILABLE_CAPABILITIES_RAW;
-    }
+    available_capabilities[available_capabilities_count++] = ANDROID_REQUEST_AVAILABLE_CAPABILITIES_RAW;
+
     staticInfo.update(ANDROID_REQUEST_AVAILABLE_CAPABILITIES,
                       available_capabilities,
                       available_capabilities_count);
@@ -4225,11 +4256,18 @@ int QCamera3HardwareInterface::initStaticMetadata(int cameraId)
              idx+=4;
           }
        } else {
-          for (uint32_t i = 0; i < gCamCapability[cameraId]->supported_raw_dim_cnt; i++) {
+          for (uint32_t i = 0; i < gCamCapability[0]->supported_raw_dim_cnt; i++) {
              available_stall_durations[idx]   = stall_formats[j];
-             available_stall_durations[idx+1] = gCamCapability[cameraId]->raw_dim[i].width;
-             available_stall_durations[idx+2] = gCamCapability[cameraId]->raw_dim[i].height;
-             available_stall_durations[idx+3] = gCamCapability[cameraId]->raw16_stall_durations[i];
+
+             if (cameraId == 1) {
+                available_stall_durations[idx+1] = 1288;
+                available_stall_durations[idx+2] = 968;
+                available_stall_durations[idx+3] = gCamCapability[0]->raw16_stall_durations[i];
+             } else {
+                available_stall_durations[idx+1] = gCamCapability[cameraId]->raw_dim[i].width;
+                available_stall_durations[idx+2] = gCamCapability[cameraId]->raw_dim[i].height;
+                available_stall_durations[idx+3] = gCamCapability[cameraId]->raw16_stall_durations[i];
+             }
              idx+=4;
           }
        }

@@ -185,3 +185,6 @@
 
 #/vtc symlink
 /vtc u:object_r:vendor_configs_file:s0
+
+# Wireless regulatory domain updater
+/(system/vendor|vendor)/bin/wireless-regdomain.sh    u:object_r:hal_wifi_supplicant_default_exec:s0
