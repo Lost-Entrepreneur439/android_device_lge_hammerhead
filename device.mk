@@ -134,7 +134,7 @@ PRODUCT_PACKAGES += \
     SystemUIGo
 
 PRODUCT_PACKAGES += \
-    android.hardware.wifi-service \
+    android.hardware.wifi-service-lazy \
     libwpa_client \
     hostapd \
     wificond \
