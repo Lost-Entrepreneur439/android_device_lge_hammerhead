@@ -335,14 +335,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.recomputecrop=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.renderengine.backend=gles \
-    persist.log.tag.OpenGLRenderer=S
-
-PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.0 \
     persist.sys.sf.disable_blurs=1 \
     ro.sf.blurs_are_expensive=1 \
-    ro.launcher.blur.appLaunch=0 \
     ro.sf.disable_triple_buffer=1
 
 # DRM
@@ -574,16 +569,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Charger
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.charger.enable_suspend=true
-
-# BPF
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.ebpf.supported=false
-
-# IORap
-PRODUCT_PROPERTY_OVERRIDES += \
-    iorapd.readahead.enable=false \
-    iorapd.perfetto.enable=false \
-    ro.iorapd.enable=false
 
 # Hardware
 PRODUCT_PROPERTY_OVERRIDES += \
