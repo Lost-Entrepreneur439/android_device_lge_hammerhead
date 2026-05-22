@@ -364,7 +364,7 @@ PRODUCT_PACKAGES += \
     libnetutils.vendor
 
 PRODUCT_PACKAGES += \
-    android.hardware.radio.config@1.0-service \
+    android.hardware.radio.config@1.1-service.hh \
     android.hardware.radio@1.4-service.hammerhead
 
 # NTFS Filesystem
