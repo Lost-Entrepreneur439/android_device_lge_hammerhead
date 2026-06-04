@@ -350,14 +350,6 @@ on property:sys.boot_completed=1
     write /dev/cpuset/camera-daemon/cpuset.cpus 0-3
     write /dev/cpuset/camera-daemon/cpuset.mems 0
 
-    # Limit cputime for background tasks
-    write /dev/cpuctl/background/cpu.cfs_period_us 1000000
-    write /dev/cpuctl/background/cpu.cfs_quota_us 2000000
-
-    # Limit cputime for dex2oat
-    write /dev/cpuctl/dex2oat/cpu.cfs_period_us 1000000
-    write /dev/cpuctl/dex2oat/cpu.cfs_quota_us 2000000
-
     # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 5% dex2oat ~2.5%)
     write /dev/cpuctl/background/cpu.shares 1024
     write /dev/cpuctl/system-background/cpu.shares 1024
