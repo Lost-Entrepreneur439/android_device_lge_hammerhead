@@ -153,12 +153,6 @@ on boot
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
     chmod 0644 /sys/module/bcmdhd/parameters/nvram_path
 
-    # LMK configuration
-    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
-    write /sys/module/lowmemorykiller/parameters/adj "0,200,500,700,900,950"
-    chmod 0400 /sys/module/lowmemorykiller/parameters/adj
-    write /sys/module/lowmemorykiller/parameters/debug_level 0
-
     # Enable Power modes
     write /sys/module/lpm_resources/enable_low_power/l2 2
     write /sys/module/lpm_resources/enable_low_power/pxo 1
