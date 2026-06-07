@@ -37,6 +37,9 @@
 # Radio HAL
 /(vendor|system/vendor)/bin/hw/android\.hardware\.radio@1\.4-service.hammerhead    u:object_r:hal_radio_default_exec:s0
 
+# Radio Config HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.radio\.config@1\.1-service.hh    u:object_r:hal_radio_config_default_exec:s0
+
 # Vibrator HAL
 /(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator-service\.hh  u:object_r:hal_vibrator_default_exec:s0
 
