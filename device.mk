@@ -536,11 +536,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.boot-dex2oat-cpu-set=0,1,2,3 \
     ro.sys.fw.dex2oat_thread_count=4
 
-# Memory optimizations
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.am.reschedule_service=true \
-    ro.vendor.qti.sys.fw.bservice_enable=true
-
 # Inherit 512M Android Go defaults.
 $(call inherit-product, build/make/target/product/go_defaults_512.mk)
 
