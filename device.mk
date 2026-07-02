@@ -601,6 +601,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     fw.max_users=1
 
+# Increase watchdog timeout multiplier to workaround ANRs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hw_timeout_multiplier=6
+
 # Since ($SRC_TARGET)/product/generic.mk is included instead of full_base.mk the device config also need to
 #  pick up the default Android Platform product locale list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
