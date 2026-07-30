@@ -8,4 +8,6 @@ echo 100 > /dev/blkio/background/blkio.weight
 
 echo 4 > /proc/sys/vm/kswapd_threads
 
+echo 1 > /proc/sys/vm/watermark_scale_factor
+
 /vendor/bin/timekeep restore
