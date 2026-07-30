@@ -2,6 +2,7 @@ allow hal_audio_default self:socket create_socket_perms;
 
 allow hal_audio_default default_android_vndservice:service_manager { find add };
 allow hal_audio_default hal_power_hwservice:hwservice_manager { find add };
+allow hal_audio_default hal_power_service:service_manager { find add };
 
 binder_call(hal_audio_default, hal_power_default)
 r_dir_file(hal_audio_default, sysfs_socinfo)
