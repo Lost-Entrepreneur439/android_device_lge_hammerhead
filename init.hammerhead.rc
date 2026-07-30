@@ -154,11 +154,6 @@ on boot
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
     chmod 0644 /sys/module/bcmdhd/parameters/nvram_path
 
-    # Tune and lock lmk minfree
-    write /sys/module/lowmemorykiller/parameters/minfree "27648,32256,36864,46080,51200,61440"
-    chmod 0400 /sys/module/lowmemorykiller/parameters/minfree
-    write /sys/module/lowmemorykiller/parameters/kill_timeout_ms 150
-
     # Enable Power modes
     write /sys/module/lpm_resources/enable_low_power/l2 2
     write /sys/module/lpm_resources/enable_low_power/pxo 1

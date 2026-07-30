@@ -10,4 +10,8 @@ echo 4 > /proc/sys/vm/kswapd_threads
 
 echo 1 > /proc/sys/vm/watermark_scale_factor
 
+# Tune lmk minfree and timeout
+echo "27648,32256,36864,46080,51200,61440" > /sys/module/lowmemorykiller/parameters/minfree
+echo 150 > /sys/module/lowmemorykiller/parameters/kill_timeout_ms
+
 /vendor/bin/timekeep restore
