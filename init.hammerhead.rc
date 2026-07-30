@@ -208,6 +208,10 @@ on boot
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 80000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
+
+    # Run SCHED_FIFO/SCHED_RR on maximum CPU freq
+    write /sys/devices/system/cpu/cpufreq/interactive/boost_rt_tasks 1
+
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
@@ -362,9 +366,6 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/system/cpu.shares 20480
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
-
-    # Boost CPU on critical tasks migration
-    write /dev/cpuctl/top-app/cpu.notify_on_migrate 1
 
     # Reduce power consumption and heating
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1728000
