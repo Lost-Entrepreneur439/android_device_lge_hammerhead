@@ -463,6 +463,10 @@ on property:init.svc.vendor.bluetooth_loader=stopped
 on property:apexd.status=ready
     mount none /vendor/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
 
+on property:init.svc.vendor.radio-1-4-hammerhead=restarting
+    stop vendor.ril-daemon
+    start vendor.ril-daemon
+
 service wireless_regdomain_update /vendor/bin/wireless-regdomain.sh
   class main
   user root
