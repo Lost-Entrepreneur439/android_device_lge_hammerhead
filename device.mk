@@ -103,7 +103,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Iwlan \
     QualifiedNetworksService \
-    PhhIms
+    PhhIms \
+    CarrierConfigOverlay
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.dbg.volte_avail_ovr=1 \
