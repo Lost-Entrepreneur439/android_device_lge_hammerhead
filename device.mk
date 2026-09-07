@@ -133,7 +133,22 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_CHARACTERISTICS := nosdcard
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGo
+
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGo \
+    Settings \
+    TeleService \
+    PhhIms \
+    Dialer \
+    Contacts \
+    messaging \
+    DocumentsUI \
+    CredentialManager \
+    Aperture \
+    Glimpse \
+    Twelve \
+    Etar \
+    StorageManager
+
 PRODUCT_DISABLE_SCUDO := true
 PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
 PRODUCT_BROKEN_VERIFY_USES_LIBRARIES := true
