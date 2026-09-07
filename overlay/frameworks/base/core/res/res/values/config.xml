@@ -277,6 +277,8 @@
         <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/system_ext/priv-app/SystemUIGo/SystemUIGo.apk"</item>
+        <item>"/data/dalvik-cache/arm/system@system_ext@priv-app@SystemUIGo@SystemUIGo.apk@classes.dex"</item>
+        <item>"/data/dalvik-cache/arm/system@system_ext@priv-app@SystemUIGo@SystemUIGo.apk@classes.vdex"</item>
         <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
