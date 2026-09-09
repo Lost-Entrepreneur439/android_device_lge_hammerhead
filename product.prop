@@ -3,3 +3,6 @@ ro.bpf.kver_override=5.4.300
 
 # MD3e
 is_expressive_design_enabled=true
+
+# Force New Zealand regulatory domain to workaround firmware restrictions for 80 MHz bandwidth on 5G APs (802.11ac)
+persist.wifi.regdomain.override=nz

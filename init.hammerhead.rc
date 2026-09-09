@@ -208,6 +208,10 @@ on boot
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 80000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
+
+    # Run SCHED_FIFO/SCHED_RR on maximum CPU freq
+    write /sys/devices/system/cpu/cpufreq/interactive/boost_rt_tasks 1
+
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
@@ -340,13 +344,13 @@ on property:sys.boot_completed=1
     # Reserve CPU 3 for the top app
     write /dev/cpuset/foreground/cpuset.cpus 0-2
     write /dev/cpuset/foreground/cpuset.mems 0
-    write /dev/cpuset/background/cpuset.cpus 0-1
+    write /dev/cpuset/background/cpuset.cpus 0
     write /dev/cpuset/background/cpuset.mems 0
-    write /dev/cpuset/system-background/cpuset.cpus 0-1
+    write /dev/cpuset/system-background/cpuset.cpus 0-2
     write /dev/cpuset/system-background/cpuset.mems 0
     write /dev/cpuset/top-app/cpuset.cpus 0-3
     write /dev/cpuset/top-app/cpuset.mems 0
-    write /dev/cpuset/restricted/cpuset.cpus 1
+    write /dev/cpuset/restricted/cpuset.cpus 0-1
     write /dev/cpuset/restricted/cpuset.mems 0
     write /dev/cpuset/camera-daemon/cpuset.cpus 0-3
     write /dev/cpuset/camera-daemon/cpuset.mems 0
@@ -358,12 +362,10 @@ on property:sys.boot_completed=1
     write /dev/cpuctl/foreground/cpu.shares 20480
     write /dev/cpuctl/top-app/cpu.shares 20480
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
+    write /dev/cpuctl/camera-daemon/cpu.notify_on_migrate 1
     write /dev/cpuctl/system/cpu.shares 20480
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
-
-    # Boost CPU on critical tasks migration
-    write /dev/cpuctl/top-app/cpu.notify_on_migrate 1
 
     # Reduce power consumption and heating
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1728000
@@ -376,8 +378,6 @@ on property:sys.boot_completed=1
 
     # enable logging of wake up reasons to kernel logs
     write /sys/module/msm_show_resume_irq/parameters/debug_mask 1
-
-    start vendor.msm_irqbalance
 
     exec u:r:su:s0 root root -- /system/bin/sh /system/vendor/bin/init.post_boot.sh
 
@@ -425,6 +425,7 @@ service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics gps
+    writepid /dev/cpuctl/camera-daemon/tasks
 
 service mpdecision /vendor/bin/mpdecision --avg_comp
    class late_start
@@ -454,7 +455,7 @@ service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/m
     class core
     user root
     group root
-    disabled
+    writepid /dev/cpuset/system-background/tasks
 
 on property:init.svc.vendor.bluetooth_loader=stopped
     chmod 0644 /data/misc/bluetooth/.bdaddr
@@ -462,6 +463,10 @@ on property:init.svc.vendor.bluetooth_loader=stopped
 
 on property:apexd.status=ready
     mount none /vendor/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind
+
+on property:init.svc.vendor.radio-1-4-hammerhead=restarting
+    stop vendor.ril-daemon
+    start vendor.ril-daemon
 
 service wireless_regdomain_update /vendor/bin/wireless-regdomain.sh
   class main
