@@ -15,11 +15,11 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_hammerhead.mk \
-    $(LOCAL_DIR)/lineage_hammerhead_gms_go_2gb.mk
+    $(LOCAL_DIR)/aicp_hammerhead.mk \
+    $(LOCAL_DIR)/aicp_hammerhead_gms_go_2gb.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_hammerhead_gms_go_2gb-user \
-    lineage_hammerhead-user \
-    lineage_hammerhead-userdebug \
-    lineage_hammerhead-eng
+    aicp_hammerhead_gms_go_2gb-user \
+    aicp_hammerhead-user \
+    aicp_hammerhead-userdebug \
+    aicp_hammerhead-eng
